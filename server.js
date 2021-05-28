@@ -17,7 +17,7 @@ app.use(express.static("static"));
 // const server = https.createServer({ key: key, cert: cert }, app);
 
 // listen port
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Running on port ${PORT}`);
 });
