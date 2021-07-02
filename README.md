@@ -16,7 +16,7 @@ The experiment accepts two HTTP get params:
 - `m3u8` a valid url poining to an HTTP Live Stream. default: https://test-streams.mux.dev/test_001/stream.m3u8.
 - `classes` a comma separated list of objects we want the model to detect, valid values are [from this list](https://github.com/nightrome/cocostuff/blob/master/labels.txt). default: person.
 
-ℹ️ <b>Note:</b> expect some loading time, since the model used by the experiment weight ~25Mb.
+ℹ️ <b>Note:</b> expect some loading time, since the model used by the experiment weights ~25Mb.
 
 ## Read the Code
 
