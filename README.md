@@ -20,7 +20,7 @@ The experiment accepts two HTTP get params:
 
 ## Read the Code
 
-All the code is in a single 128-lines file - [`js-src\index.js`](\js-src\index.js)
+All the code is in a single 128-lines file - [`js-src\index.js`](https://github.com/sandropaganotti/hls-coco/blob/master/js-src/index.js)
 
 ## Run Locally
 
