@@ -19,6 +19,7 @@ function getClasses() {
 
 function createVideoStream(video, url) {
   video.setAttribute("crossOrigin", "anonymous");
+  video.volume = 0;
   if (Hls.isSupported()) {
     var hls = new Hls();
     hls.loadSource(url);
@@ -59,20 +60,51 @@ async function startDetection(model, video) {
 function drawPredictions(video, onDetection) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
-  const categories = getClasses();
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
+  const isMouseOver = trackMousePosition(canvas);
   onDetection((predictions) => {
-    context.drawImage(video, 0, 0);
-    predictions.forEach(({ bbox: [x, y, w, h], class: category, score }) => {
-      if (score > 0.5 && categories.includes(category)) {
-        context.beginPath();
-        context.rect(x, y, w, h);
-        context.stroke();
-      }
-    });
+    const matchingPredictions = getMatchingPredictions(predictions);
+    if (isMouseOver()) {
+      showFullVideo(matchingPredictions, context, video);
+    } else {
+      showCutOff(matchingPredictions, context, video);
+    }
   });
   return canvas;
+}
+
+function getMatchingPredictions(predictions) {
+  const categories = getClasses();
+  return predictions
+    .filter(
+      ({ class: category, score }) =>
+        score > 0.5 && categories.includes(category)
+    )
+    .map(({ bbox }) => bbox);
+}
+
+function showFullVideo(matchingPredictions, context, video) {
+  context.drawImage(video, 0, 0);
+  matchingPredictions.forEach(([x, y, w, h]) => {
+    context.beginPath();
+    context.rect(x, y, w, h);
+    context.stroke();
+  });
+}
+
+function showCutOff(matchingPredictions, context, video) {
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  matchingPredictions.forEach(([x, y, w, h]) => {
+    context.drawImage(video, x, y, w, h, x, y, w, h);
+  });
+}
+
+function trackMousePosition(canvas) {
+  let isMouseOver = false;
+  canvas.addEventListener("mouseenter", () => (isMouseOver = true));
+  canvas.addEventListener("mouseleave", () => (isMouseOver = false));
+  return () => isMouseOver;
 }
 
 function setLoadingContent(loading, text) {
