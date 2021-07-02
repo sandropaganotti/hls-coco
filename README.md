@@ -1,4 +1,8 @@
 # Real Time Object Detection From a Live Stream on Web
 
-![a video of the experiment](static/img/my-image.png)<br/>
+<div align="center">
+
+![a video of the experiment](static/img/capture.gif)<br/>
 Click here to check the demo
+
+</div>
