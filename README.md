@@ -1,6 +1,6 @@
-# Web Real Time Object Detection From an HTTP Live Stream
+# In Browser Real Time Object Detection From an HTTP Live Stream
 
-This experiment combines [hsl.js](https://github.com/video-dev/hls.js/) and [tensorflow.js](https://www.tensorflow.org/js) to perform real time object detection. When the mouse hovers the canvas the entire stream is shown, with the detected object framed in a black box, otherwise only the parts of the stream corresponding to detected objects are displayed.
+This experiment combines [hsl.js](https://github.com/video-dev/hls.js/) and [tensorflow.js](https://www.tensorflow.org/js) to perform real time object detection from a browser. When the mouse hovers the canvas the entire stream is shown, with the detected object framed in a black box, otherwise only the parts of the stream corresponding to detected objects are displayed.
 
 <div align="center">
 
